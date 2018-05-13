@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SpiralNumbersConsole
 {
-    class Program
+    static class Program
     {
         const int Width = 16;
         const int Height = 10;
@@ -20,8 +20,8 @@ namespace SpiralNumbersConsole
                 .Select(g => g
                     .OrderBy(_ => _.p.X)
                     .Select(_ => _.n.ToString().PadLeft(digitsLength))
-                    .Join(" "))
-                .Join("\n");
+                    .JoinStrings(" "))
+                .JoinStrings("\n");
 
             Console.WriteLine(text);
         }
@@ -56,11 +56,8 @@ namespace SpiralNumbersConsole
 
         static bool IsInRange(Int32Vector p) => 0 <= p.X && p.X < Width && 0 <= p.Y && p.Y < Height;
         static Int32Vector TurnRight(Int32Vector v) => new Int32Vector { X = -v.Y, Y = v.X };
-    }
 
-    public static class StringHelper
-    {
-        public static string Join(this IEnumerable<string> source, string separator) => string.Join(separator, source);
+        static string JoinStrings(this IEnumerable<string> source, string separator) => string.Join(separator, source);
     }
 
     public struct Int32Vector
