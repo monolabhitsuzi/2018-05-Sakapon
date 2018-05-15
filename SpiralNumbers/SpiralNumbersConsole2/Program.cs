@@ -27,26 +27,30 @@ namespace SpiralNumbersConsole2
 
         static int[,] GetPoints()
         {
-            var p = new Int32Vector();
-            var delta = new Int32Vector { X = 1 };
-
             var matrix = new int[Width, Height];
             if (matrix.Length == 0) return matrix;
-            matrix[p.X, p.Y] = 1;
+            var delta = new Int32Vector { X = 1 };
 
             bool IsValid(Int32Vector _p) => IsInRange(_p) && matrix[_p.X, _p.Y] == 0;
 
-            for (int i = 2; i <= matrix.Length; i++)
+            Int32Vector NextPoint(Int32Vector _p)
             {
-                var temp = p + delta;
+                var temp = _p + delta;
 
                 if (!IsValid(temp))
                 {
                     delta = TurnRight(delta);
-                    temp = p + delta;
+                    temp = _p + delta;
                 }
+                return temp;
+            }
 
-                p = temp;
+            var p = new Int32Vector();
+            matrix[p.X, p.Y] = 1;
+
+            for (var i = 2; i <= matrix.Length; i++)
+            {
+                p = NextPoint(p);
                 matrix[p.X, p.Y] = i;
             }
             return matrix;
