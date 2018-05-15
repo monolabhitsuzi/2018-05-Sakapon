@@ -36,13 +36,10 @@ namespace SpiralNumbersConsole2
             Int32Vector NextPoint(Int32Vector _p)
             {
                 var temp = _p + delta;
+                if (IsValid(temp)) return temp;
 
-                if (!IsValid(temp))
-                {
-                    delta = TurnRight(delta);
-                    temp = _p + delta;
-                }
-                return temp;
+                delta = TurnRight(delta);
+                return _p + delta;
             }
 
             var p = new Int32Vector();
