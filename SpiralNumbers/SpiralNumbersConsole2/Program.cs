@@ -16,13 +16,11 @@ namespace SpiralNumbersConsole2
             var matrix = GetPoints();
             var digitsLength = matrix.Length.ToString().Length;
 
-            var text = Range(0, Height)
+            Range(0, Height)
                 .Select(j => Range(0, Width)
                     .Select(i => matrix[i, j].ToString().PadLeft(digitsLength))
                     .JoinStrings(" "))
-                .JoinStrings("\n");
-
-            WriteLine(text);
+                .Execute(WriteLine);
         }
 
         static int[,] GetPoints()
@@ -58,5 +56,9 @@ namespace SpiralNumbersConsole2
         static (int X, int Y) TurnRight((int X, int Y) v) => (X: -v.Y, Y: v.X);
 
         static string JoinStrings(this IEnumerable<string> source, string separator) => string.Join(separator, source);
+        static void Execute<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
+        {
+            foreach (var item in source) action(item);
+        }
     }
 }
