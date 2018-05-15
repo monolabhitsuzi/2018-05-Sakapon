@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Console;
+using static System.Linq.Enumerable;
 
 namespace SpiralNumbersConsole2
 {
@@ -14,13 +16,13 @@ namespace SpiralNumbersConsole2
             var matrix = GetPoints();
             var digitsLength = matrix.Length.ToString().Length;
 
-            var text = Enumerable.Range(0, Height)
-                .Select(j => Enumerable.Range(0, Width)
+            var text = Range(0, Height)
+                .Select(j => Range(0, Width)
                     .Select(i => matrix[i, j].ToString().PadLeft(digitsLength))
                     .JoinStrings(" "))
                 .JoinStrings("\n");
 
-            Console.WriteLine(text);
+            WriteLine(text);
         }
 
         static int[,] GetPoints()

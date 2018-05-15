@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Console;
+using static System.Linq.Enumerable;
 
 namespace SpiralNumbersConsole
 {
@@ -11,7 +13,7 @@ namespace SpiralNumbersConsole
 
         static void Main(string[] args)
         {
-            var numbers = Enumerable.Range(1, Width * Height).ToArray();
+            var numbers = Range(1, Width * Height).ToArray();
             var digitsLength = numbers.Length.ToString().Length;
 
             var text = GetPoints()
@@ -23,7 +25,7 @@ namespace SpiralNumbersConsole
                     .JoinStrings(" "))
                 .JoinStrings("\n");
 
-            Console.WriteLine(text);
+            WriteLine(text);
         }
 
         static IEnumerable<Int32Vector> GetPoints()
